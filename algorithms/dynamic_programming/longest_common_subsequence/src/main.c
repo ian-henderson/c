@@ -5,10 +5,11 @@
 int
 main(void)
 {
-  char *x = "abcde", *y = "ace";
+  char *x = "ACCGGTCGAGTGCGCGGAAGCCGGCCGAA",
+        *y = "GTCGTTCGGAATGCCGTTGCTCTGTAAA";
+
   size_t m = strlen(x), n = strlen(y);
-  printf("subsequence a: %s\n", x);
-  printf("subsequence b: %s\n", y);
-  printf("longest common subsequence: ???\n");
-  longest_common_subsequence(x, y, m, n);
+
+  printf("longest common subsequence: %d\n",
+         longest_common_subsequence(x, y, m, n));
 }

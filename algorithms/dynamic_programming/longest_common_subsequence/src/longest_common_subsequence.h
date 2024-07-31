@@ -3,8 +3,11 @@
 
 #include <string.h>
 
-int *
+int
 longest_common_subsequence(char *x, char *y, size_t m, size_t n);
+
+int
+max(int, int);
 
 int **
 memo_array_create(char *, char *);

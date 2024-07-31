@@ -3,16 +3,39 @@
 #include <string.h>
 #include "longest_common_subsequence.h"
 
-int *
+int
 longest_common_subsequence(char *x, char *y, size_t m, size_t n)
 {
   int **memo = memo_array_create(x, y);
 
+  for (int i = m - 1; i > -1; i--)
+    {
+      for (int j = n - 1; j > -1; j--)
+        {
+          if (x[i] == y[j])
+            {
+              memo[i][j] = 1 + memo[i + 1][j + 1];
+            }
+          else
+            {
+              memo[i][j] = max(memo[i][j + 1], memo[i + 1][j]);
+            }
+        }
+    }
+
   memo_array_print(memo, m, n);
+
+  int value = memo[0][0];
 
   memo_array_free(memo, m);
 
-  return NULL;
+  return value;
+}
+
+int
+max(int x, int y)
+{
+  return x > y ? x : y;
 }
 
 int **
@@ -77,12 +100,7 @@ memo_array_print(int **memo, size_t m, size_t n)
     {
       for (size_t i = 0; i <= m; i++)
         {
-          printf("%d", memo[i][j]);
-
-          if (i != m)
-            {
-              printf(" ");
-            }
+          printf("%4d", memo[i][j]);
         }
 
       printf("\n");
