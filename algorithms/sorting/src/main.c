@@ -5,7 +5,7 @@
 #include "../include/sorting.h"
 
 int
-main()
+main(void)
 {
   int i, max_value = INT_MAX, n = 8, *array = malloc(sizeof(int) * n);
   srand(time(NULL)); // seed random number generator

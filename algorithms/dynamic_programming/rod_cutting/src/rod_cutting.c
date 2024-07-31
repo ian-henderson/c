@@ -1,7 +1,7 @@
 #include <limits.h> // INT_MIN
 #include <stdio.h>  // fprintf, printf, stderr
-#include <stdlib.h> // malloc
-#include "../include/rod_cutting.h"
+#include <stdlib.h> // EXIT_FAILURE, exit, malloc
+#include "rod_cutting.h"
 
 /*
   Note: there would ideally be a way of preserving r arrays for
@@ -18,7 +18,7 @@ bottom_up_cut_rod(int p[], int n)
     {
       fprintf(stderr, "Failed to create bottom_up_cut_rod memoization array.\n");
 
-      exit(1);
+      exit(EXIT_FAILURE);
     }
 
   r[0] = 0;
@@ -57,7 +57,7 @@ memoized_cut_rod(int p[], int n)
     {
       fprintf(stderr, "Failed to create memoized_cut_rod memoization array.\n");
 
-      exit(1);
+      exit(EXIT_FAILURE);
     }
 
   for (int i = 0; i < n; i++)

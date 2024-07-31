@@ -5,7 +5,7 @@
 #include "../include/red_black_tree.h"
 
 int
-main()
+main(void)
 {
   srand(time(NIL)); // seeds random number generator
   rbt *t = rbt_create();

@@ -18,8 +18,8 @@
 */
 
 #include <stdio.h>  // fprintf, printf, stderr
-#include <stdlib.h> // exit
-#include "../include/rod_cutting.h"
+#include <stdlib.h> // EXIT_FAILURE
+#include "rod_cutting.h"
 
 int
 main(void)
@@ -31,7 +31,7 @@ main(void)
   if (n > p_length)
     {
       fprintf(stderr, "n is larger than prices array\n");
-      exit(1);
+      return EXIT_FAILURE;
     }
 
   printf("prices: ");

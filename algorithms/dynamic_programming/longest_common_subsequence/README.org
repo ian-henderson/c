@@ -1,0 +1,3 @@
+* Longest Common Subsequence
+
+** Step 1: Characterizing a longest common subsequence
