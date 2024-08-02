@@ -31,6 +31,7 @@ main(void)
   if (n > p_length)
     {
       fprintf(stderr, "n is larger than prices array\n");
+
       return EXIT_FAILURE;
     }
 

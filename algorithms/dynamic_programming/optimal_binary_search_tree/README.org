@@ -1,0 +1,3 @@
+* Optimal/Weighted Binary Search Tree
+
+https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24
