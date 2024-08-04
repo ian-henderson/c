@@ -52,22 +52,25 @@ cost_of_optimal_bst_memoized_aux(int **memo, int p[], int i, int j)
       return memo[i][j];
     }
 
-  int p_sum = subarray_sum(p, i, j),
-      min = INT_MAX;
+  int r_cost = subarray_sum(p, i, j); /* cost of making r head of bst */
+
+  int min_cost = INT_MAX;
 
   for (int r = i; r <= j; r++)
     {
-      int cost = p_sum
-                 + cost_of_optimal_bst_memoized_aux(memo, p, i, r - 1)
-                 + cost_of_optimal_bst_memoized_aux(memo, p, r + 1, j);
+      int left_subtree_cost = cost_of_optimal_bst_memoized_aux(memo, p, i, r - 1);
 
-      if (cost < min)
+      int right_subtree_cost = cost_of_optimal_bst_memoized_aux(memo, p, r + 1, j);
+
+      int total_cost = r_cost + left_subtree_cost + right_subtree_cost;
+
+      if (total_cost < min_cost)
         {
-          min = cost;
+          min_cost = total_cost;
         }
     }
 
-  return memo[i][j] = min;
+  return memo[i][j] = min_cost;
 }
 
 int
