@@ -2,19 +2,19 @@
 #define ROD_CUTTING_H
 
 int
-bottom_up_cut_rod(int p[], int n);
+cut_rod_memoized(int p[], int n);
+
+int
+cut_rod_memoized_aux(int p[], int n, int r[]);
+
+int
+cut_rod_naive(int p[], int n);
+
+int
+cut_rod_tabulated(int p[], int n);
 
 int
 max(int, int);
-
-int
-memoized_cut_rod(int p[], int n);
-
-int
-memoized_cut_rod_aux(int p[], int n, int r[]);
-
-int
-naively_cut_rod(int p[], int n);
 
 void
 print_array(int [], int length);

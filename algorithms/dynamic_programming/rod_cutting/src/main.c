@@ -38,7 +38,7 @@ main(void)
   printf("prices: ");
   print_array(p, p_length);
   printf("n: %d\n", n);
-  printf("naive solution: %d\n", naively_cut_rod(p, n));
-  printf("memoized solution: %d\n", memoized_cut_rod(p, n));
-  printf("bottom-up solution: %d\n", bottom_up_cut_rod(p, n));
+  printf("Max profit (naive): %d\n", cut_rod_naive(p, n));
+  printf("Max profit (memoized): %d\n", cut_rod_memoized(p, n));
+  printf("Max profit (tabulated): %d\n", cut_rod_tabulated(p, n));
 }
