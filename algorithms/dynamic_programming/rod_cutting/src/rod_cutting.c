@@ -60,7 +60,7 @@ cut_rod_naive(int p[], int n)
       return 0;
     }
 
-  int max_profit = INT_MIN; // -Infinity
+  int max_profit = INT_MIN; /* -Infinity */
 
   for (int i = 1; i <= n; i++)
     {
