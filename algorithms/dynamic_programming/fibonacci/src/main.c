@@ -1,5 +1,5 @@
-#include <stdio.h>  // fprintf, printf, stderr
-#include <stdlib.h> // EXIT_FAILURE, atoi
+#include <stdio.h>
+#include <stdlib.h>
 #include "fibonacci.h"
 
 int
@@ -28,5 +28,7 @@ main(int argc, char *argv[])
       return EXIT_FAILURE;
     }
 
+  printf("fibonacci_naive(%d) = %llu\n", n, fibonacci_naive(n));
+  printf("fibonacci_memoized(%d) = %llu\n", n, fibonacci_memoized(n));
   printf("fibonacci_tabulated(%d) = %llu\n", n, fibonacci_tabulated(n));
 }

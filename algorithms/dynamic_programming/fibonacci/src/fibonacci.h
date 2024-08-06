@@ -1,6 +1,9 @@
 #ifndef FIBONACCI_H
 #define FIBONACCI_H
 
+void
+array_print(unsigned long long int a[], int length);
+
 unsigned long long int
 fibonacci_memoized(int n);
 
@@ -12,8 +15,5 @@ fibonacci_naive(int n);
 
 unsigned long long int
 fibonacci_tabulated(int n);
-
-void
-print_array(unsigned long long int a[], int length);
 
 #endif

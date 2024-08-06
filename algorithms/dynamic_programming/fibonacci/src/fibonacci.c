@@ -1,6 +1,25 @@
-#include <stdio.h>  // fprintf, printf, stderr
-#include <stdlib.h> // EXIT_FAILURE, exit, malloc
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "fibonacci.h"
+
+void
+array_print(unsigned long long int a[], int length)
+{
+  printf("[");
+
+  for (int i = 0; i < length; i++)
+    {
+      printf("%llu", a[i]);
+
+      if (i < length - 1)
+        {
+          printf(", ");
+        }
+    }
+
+  printf("]\n");
+}
 
 /*
   Memoization (Top-Down Dynamic Programming)
@@ -11,7 +30,7 @@ unsigned long long int
 fibonacci_memoized(int n)
 {
   unsigned long long int
-  *memo = malloc(sizeof(unsigned long long int) * (n + 1));
+  *memo = malloc((n + 1) * sizeof(unsigned long long int));
 
   if (memo == NULL)
     {
@@ -20,10 +39,8 @@ fibonacci_memoized(int n)
       exit(EXIT_FAILURE);
     }
 
-  for (int i = 0; i <= n; i++)
-    {
-      memo[i] = -1;
-    }
+  /* zeros out memo */
+  memset(memo, 0U, (n + 1) * sizeof(unsigned long long int));
 
   unsigned long long int value = fibonacci_memoized_aux(n, memo);
 
@@ -37,10 +54,10 @@ fibonacci_memoized_aux(int n, unsigned long long int *memo)
 {
   if (n <= 2)
     {
-      return 1;
+      return 1U;
     }
 
-  if (memo[n] != -1U)
+  if (memo[n] != 0U)
     {
       return memo[n];
     }
@@ -73,7 +90,7 @@ fibonacci_naive(int n)
 {
   if (n <= 2)
     {
-      return 1;
+      return 1U;
     }
 
   unsigned long long int a = fibonacci_naive(n - 2),
@@ -107,8 +124,8 @@ fibonacci_tabulated(int n)
   unsigned long long int
   *memo = malloc(sizeof(unsigned long long int) * (n + 1));
 
-  memo[0] = 0;
-  memo[1] = 1;
+  memo[0] = 0U;
+  memo[1] = 1U;
 
   for (int i = 2; i <= n; i++)
     {
@@ -132,22 +149,4 @@ fibonacci_tabulated(int n)
   free(memo);
 
   return value;
-}
-
-void
-print_array(unsigned long long int a[], int length)
-{
-  printf("[");
-
-  for (int i = 0; i < length; i++)
-    {
-      printf("%llu", a[i]);
-
-      if (i < length - 1)
-        {
-          printf(", ");
-        }
-    }
-
-  printf("]\n");
 }
