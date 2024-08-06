@@ -3,3 +3,5 @@
 - [[https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24][Geeks for Geeks]]
 
 - [[https://en.wikipedia.org/wiki/Optimal_binary_search_tree][Wikipedia]]
+
+** TODO create the optimal binary search tree once the optimal cost is calculated
