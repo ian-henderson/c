@@ -14,6 +14,7 @@ hash_table_create(void)
   return t;
 }
 
+// TODO: handle case where node didn't exist
 int
 hash_table_delete(hash_table *t, char *key)
 {
@@ -37,14 +38,13 @@ hash_table_delete(hash_table *t, char *key)
             }
 
           free(current_node);
+          t->node_count--;
           break;
         }
 
       previous_node = current_node;
       current_node = current_node->next;
     }
-
-  t->node_count--;
 
   return 0;
 }

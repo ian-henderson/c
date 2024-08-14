@@ -396,7 +396,6 @@ _rbt_insert_fix(rbt *tree, rbt_node *node)
         {
           uncle = node->parent->parent->left;
 
-          // uncle->color reference seg faults
           if (uncle != NIL && uncle->color == RED)
             {
               node->parent->color = BLACK;

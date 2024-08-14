@@ -52,9 +52,9 @@ fibonacci_memoized(int n)
 unsigned long long int
 fibonacci_memoized_aux(int n, unsigned long long int *memo)
 {
-  if (n <= 2)
+  if (n <= 1)
     {
-      return 1U;
+      return (unsigned long long) n;
     }
 
   if (memo[n] != 0U)
@@ -88,9 +88,9 @@ fibonacci_memoized_aux(int n, unsigned long long int *memo)
 unsigned long long int
 fibonacci_naive(int n)
 {
-  if (n <= 2)
+  if (n <= 1)
     {
-      return 1U;
+      return (unsigned long long int) n;
     }
 
   unsigned long long int a = fibonacci_naive(n - 2),

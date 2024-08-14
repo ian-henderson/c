@@ -1,0 +1,3 @@
+* [[https://buildyourownlisp.com/contents][Build Your Own Lisp]]
+
+Debian dependency: `libedit-dev` for editline

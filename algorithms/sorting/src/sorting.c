@@ -81,7 +81,6 @@ heapify(int array[], int heap_size, int root)
       largest = right;
     }
 
-  // if largest is not root
   if (largest != root)
     {
       swap(&array[root], &array[largest]);
@@ -123,13 +122,11 @@ insertion_sort(int array[], int length)
 // Average performance:         Theta(n*log(n))
 // Worst-case space complexity: O(n) total with O(n) auxillary, O(1) auxillary
 //                                  with linked lists
-
 int *
 merge_sort(int array[], int array_length)
 {
   if (is_best_case_array(array, array_length))
     {
-      printf("best case\n");
       return array;
     }
 
@@ -146,7 +143,7 @@ merge_sort_r(int array[], int begin, int end)
       return;
     }
 
-  const int mid = begin + (end - begin) / 2;
+  int mid = begin + (end - begin) / 2;
   merge_sort_r(array, begin, mid);
   merge_sort_r(array, mid + 1, end);
   merge(array, begin, mid, end);
@@ -252,7 +249,7 @@ quick_sort_r(int array[], int low, int high)
 int
 partition(int array[], int low, int high)
 {
-  const int pivot = array[high];
+  int pivot = array[high];
 
   // index of smaller element and indicates the right position of pivot
   // found so far
@@ -279,7 +276,7 @@ partition(int array[], int low, int high)
 // Average performance:         O(n^2) comparisons, O(n) swaps
 // Worst-case Space Complexity: O(1) auxillary
 int *
-selection_sort(int array[], const int array_length)
+selection_sort(int array[], int array_length)
 {
   if (is_best_case_array(array, array_length))
     {
