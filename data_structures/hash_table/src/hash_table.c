@@ -1,160 +1,126 @@
-#include <stdio.h>   // fprintf, printf, stderr
-#include <stdlib.h>  // malloc, __INT16_MAX__
-#include <string.h>  // strcmp, strlen
 #include "../include/hash_table.h"
+#include <stdio.h>  // fprintf, printf, stderr
+#include <stdlib.h> // malloc, __INT16_MAX__
+#include <string.h> // strcmp, strlen
 
-hash_table *
-hash_table_create(void)
-{
-  hash_table *t = malloc(sizeof(hash_table));
-  t->capacity = 100;
-  t->buffer = malloc(sizeof(hash_table_node) * t->capacity);
-  t->node_count = 0;
-
-  return t;
+hash_table *hash_table_create(void) {
+    hash_table *t = malloc(sizeof(hash_table));
+    t->capacity = 100;
+    t->buffer = malloc(sizeof(hash_table_node) * t->capacity);
+    t->node_count = 0;
+    return t;
 }
 
-// TODO: handle case where node didn't exist
-int
-hash_table_delete(hash_table *t, char *key)
-{
-  int index = _hash_table_hash(t, key);
+// TODO: handle case where node doesn't exist
+int hash_table_delete(hash_table *t, char *key) {
+    int index = _hash_table_hash(t, key);
 
-  hash_table_node *current_node = t->buffer[index],
-                   *previous_node = NULL;
+    hash_table_node *current_node = t->buffer[index], *previous_node = NULL;
 
-  while (current_node != NULL)
-    {
-      if (strcmp(key, current_node->key) == 0)
-        {
-          // head of list
-          if (current_node == t->buffer[index])
-            {
-              t->buffer[index] = current_node->next;
-            }
-          else
-            {
-              previous_node->next = current_node->next;
+    while (current_node != NULL) {
+        if (strcmp(key, current_node->key) == 0) {
+            // head of list
+            if (current_node == t->buffer[index]) {
+                t->buffer[index] = current_node->next;
+            } else {
+                previous_node->next = current_node->next;
             }
 
-          free(current_node);
-          t->node_count--;
-          break;
+            free(current_node);
+            t->node_count--;
+            break;
         }
 
-      previous_node = current_node;
-      current_node = current_node->next;
+        previous_node = current_node;
+        current_node = current_node->next;
     }
 
-  return 0;
+    return 0;
 }
 
-void
-hash_table_free(hash_table *t)
-{
-  for (int i = 0; i < t->capacity; i++)
-    {
-      _hash_table_free_node_list(t->buffer[i]);
+void hash_table_free(hash_table *t) {
+    for (int i = 0; i < t->capacity; i++) {
+        _hash_table_free_node_list(t->buffer[i]);
     }
 
-  free(t->buffer);
+    free(t->buffer);
 
-  free(t);
+    free(t);
 }
 
-int
-hash_table_insert(hash_table *t, char *key, char *value)
-{
-  // Duplicate key/value pair case
-  if ((hash_table_search(t, key)) == value)
-    {
-      return 0;
+int hash_table_insert(hash_table *t, char *key, char *value) {
+    // Duplicate key/value pair case
+    if ((hash_table_search(t, key)) == value) {
+        return 0;
     }
 
-  hash_table_node *n = _hash_table_node_create(key, value);
+    hash_table_node *n = _hash_table_node_create(key, value);
 
-  if (n == NULL)
-    {
-      fprintf(stderr, "Failed to create node.\n");
+    if (n == NULL) {
+        fprintf(stderr, "Failed to create node.\n");
 
-      return 1;
+        return 1;
     }
 
-  int index = _hash_table_hash(t, key);
+    int index = _hash_table_hash(t, key);
 
-  if (t->buffer[index] == NULL)
-    {
-      t->buffer[index] = n;
-    }
-  else
-    {
-      n->next = t->buffer[index];
-      t->buffer[index] = n;
+    if (t->buffer[index] == NULL) {
+        t->buffer[index] = n;
+    } else {
+        n->next = t->buffer[index];
+        t->buffer[index] = n;
     }
 
-  t->node_count++;
+    t->node_count++;
 
-  return 0;
+    return 0;
 }
 
-char *
-hash_table_search(hash_table *t, char *key)
-{
-  int index = _hash_table_hash(t, key);
-  hash_table_node *n = t->buffer[index];
+char *hash_table_search(hash_table *t, char *key) {
+    int index = _hash_table_hash(t, key);
+    hash_table_node *n = t->buffer[index];
 
-  while (n != NULL)
-    {
-      if (n->key == key)
-        {
-          return n->value;
+    while (n != NULL) {
+        if (n->key == key) {
+            return n->value;
         }
 
-      n = n->next;
+        n = n->next;
     }
 
-  return NULL;
+    return NULL;
 }
 
 // "private" functions
 
-void
-_hash_table_free_node_list(hash_table_node *n)
-{
-  if (n == NULL)
-    {
-      return;
+void _hash_table_free_node_list(hash_table_node *n) {
+    if (n == NULL) {
+        return;
     }
 
-  _hash_table_free_node_list(n->next);
+    _hash_table_free_node_list(n->next);
 
-  free(n);
+    free(n);
 }
 
-int
-_hash_table_hash(hash_table *t, char *key)
-{
-  int factor = 31, hash = 0, i, max = __INT16_MAX__;
+int _hash_table_hash(hash_table *t, char *key) {
+    int factor = 31, hash = 0, i, max = __INT16_MAX__;
 
-  for (i = 0; i < (int)strlen(key); i++)
-    {
-      hash = ((hash % t->capacity)
-              + (((int)key[i]) * factor) % t->capacity)
-             % t->capacity;
+    for (i = 0; i < (int)strlen(key); i++) {
+        hash = ((hash % t->capacity) + (((int)key[i]) * factor) % t->capacity) %
+               t->capacity;
 
-      factor = ((factor % max) * (31 % max)) % max;
+        factor = ((factor % max) * (31 % max)) % max;
     }
 
-  return hash;
+    return hash;
 }
 
-hash_table_node *
-_hash_table_node_create(char *key, char *value)
-{
-  hash_table_node *n = malloc(sizeof(hash_table_node));
-  n->next = n->previous = NULL;
-  n->key = key;
-  n->value = value;
+hash_table_node *_hash_table_node_create(char *key, char *value) {
+    hash_table_node *n = malloc(sizeof(hash_table_node));
+    n->next = n->previous = NULL;
+    n->key = key;
+    n->value = value;
 
-  return n;
+    return n;
 }

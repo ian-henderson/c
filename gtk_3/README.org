@@ -1,5 +1,0 @@
-* GTK 3
-
-** [[https://docs.gtk.org/gtk3/index.html][Documentation]]
-   - [[https://docs.gtk.org/gtk3/getting_started.html][Getting Started]]
-   - [[https://gtk.org/docs/installations/linux/][Linux Installation]]

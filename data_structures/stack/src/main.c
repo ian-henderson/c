@@ -1,46 +1,39 @@
+#include "../include/stack.h"
 #include <stdio.h>  // fprintf, printf, stderr
 #include <stdlib.h> // atoi, exit
-#include "../include/stack.h"
 
-int
-main(int argc, char *argv[])
-{
-  printf("Creating stack array.\n");
+int main(int argc, char *argv[]) {
+    printf("Creating stack array.\n");
 
-  stack *s = stack_create();
-  int i, n = 10000, popped_value;
+    stack *s = stack_create();
+    int i, n = 10000, popped_value;
 
-  if (argc > 1)
-    {
-      n = atoi(argv[1]);
+    if (argc > 1) {
+        n = atoi(argv[1]);
     }
 
-  if (n == 0)
-    {
-      fprintf(stderr,
-              "Invalid 'n' value provided.\nEnter a non-zero integer.\n");
-      stack_free(s);
-      exit(1);
+    if (n == 0) {
+        fprintf(stderr,
+                "Invalid 'n' value provided.\nEnter a non-zero integer.\n");
+        stack_free(s);
+        exit(1);
     }
 
-  printf("Pushing %d values to stack.\n", n);
+    printf("Pushing %d values to stack.\n", n);
 
-  for (i = 0; i < n; i++)
-    {
-      stack_push(s, i);
+    for (i = 0; i < n; i++) {
+        stack_push(s, i);
     }
 
-  printf("Popping %d values off stack.\n", n);
+    printf("Popping %d values off stack.\n", n);
 
-  for (i = 0; i < n; i++)
-    {
-      if (stack_pop(s, &popped_value) == 1)
-        {
-          fprintf(stderr, "Pop error received.\n");
+    for (i = 0; i < n; i++) {
+        if (stack_pop(s, &popped_value) == 1) {
+            fprintf(stderr, "Pop error received.\n");
         }
     }
 
-  printf("Freeing stack.\n");
+    printf("Freeing stack.\n");
 
-  stack_free(s);
+    stack_free(s);
 }

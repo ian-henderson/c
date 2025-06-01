@@ -1,24 +1,20 @@
+#include "fibonacci.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "fibonacci.h"
 
-void
-array_print(unsigned long long int a[], int length)
-{
-  printf("[");
+void array_print(unsigned long long int a[], int length) {
+    printf("[");
 
-  for (int i = 0; i < length; i++)
-    {
-      printf("%llu", a[i]);
+    for (int i = 0; i < length; i++) {
+        printf("%llu", a[i]);
 
-      if (i < length - 1)
-        {
-          printf(", ");
+        if (i < length - 1) {
+            printf(", ");
         }
     }
 
-  printf("]\n");
+    printf("]\n");
 }
 
 /*
@@ -26,58 +22,51 @@ array_print(unsigned long long int a[], int length)
   Space Complexity: O(n)
   Time Complexity:  O(n)
 */
-unsigned long long int
-fibonacci_memoized(int n)
-{
-  unsigned long long int
-  *memo = malloc((n + 1) * sizeof(unsigned long long int));
+unsigned long long int fibonacci_memoized(int n) {
+    unsigned long long int *memo =
+        malloc((n + 1) * sizeof(unsigned long long int));
 
-  if (memo == NULL)
-    {
-      fprintf(stderr, "Failed to create memo array.\n");
+    if (memo == NULL) {
+        fprintf(stderr, "Failed to create memo array.\n");
 
-      exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
-  /* zeros out memo */
-  memset(memo, 0U, (n + 1) * sizeof(unsigned long long int));
+    /* zeros out memo */
+    memset(memo, 0U, (n + 1) * sizeof(unsigned long long int));
 
-  unsigned long long int value = fibonacci_memoized_aux(n, memo);
+    unsigned long long int value = fibonacci_memoized_aux(n, memo);
 
-  free(memo);
+    free(memo);
 
-  return value;
+    return value;
 }
 
-unsigned long long int
-fibonacci_memoized_aux(int n, unsigned long long int *memo)
-{
-  if (n <= 1)
-    {
-      return (unsigned long long) n;
+unsigned long long int fibonacci_memoized_aux(int n,
+                                              unsigned long long int *memo) {
+    if (n <= 1) {
+        return (unsigned long long)n;
     }
 
-  if (memo[n] != 0U)
-    {
-      return memo[n];
+    if (memo[n] != 0U) {
+        return memo[n];
     }
 
-  memo[n] = fibonacci_memoized_aux(n - 1, memo)
-            + fibonacci_memoized_aux(n - 2, memo);
+    memo[n] = fibonacci_memoized_aux(n - 1, memo) +
+              fibonacci_memoized_aux(n - 2, memo);
 
-  /* unsigned overflow check */
-  if (memo[n] < memo[n - 1])
-    {
-      fprintf(stderr,
-              "unsigned long long int overflow at fibonacci(%d) = %llu\n",
-              n - 1, memo[n - 1]);
+    /* unsigned overflow check */
+    if (memo[n] < memo[n - 1]) {
+        fprintf(stderr,
+                "unsigned long long int overflow at fibonacci(%d) = %llu\n",
+                n - 1, memo[n - 1]);
 
-      free(memo);
+        free(memo);
 
-      exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
-  return memo[n];
+    return memo[n];
 }
 
 /*
@@ -85,29 +74,24 @@ fibonacci_memoized_aux(int n, unsigned long long int *memo)
   Space Complexity: O(n)
   Time Complexity:  O(2^n)
 */
-unsigned long long int
-fibonacci_naive(int n)
-{
-  if (n <= 1)
-    {
-      return (unsigned long long int) n;
+unsigned long long int fibonacci_naive(int n) {
+    if (n <= 1) {
+        return (unsigned long long int)n;
     }
 
-  unsigned long long int a = fibonacci_naive(n - 2),
-                         b = fibonacci_naive(n - 1),
-                         c = a + b;
+    unsigned long long int a = fibonacci_naive(n - 2),
+                           b = fibonacci_naive(n - 1), c = a + b;
 
-  /* unsigned overflow check */
-  if (c < b)
-    {
-      fprintf(stderr,
-              "unsigned long long int overflow at fibonacci(%d) = %llu\n",
-              n - 1, b);
+    /* unsigned overflow check */
+    if (c < b) {
+        fprintf(stderr,
+                "unsigned long long int overflow at fibonacci(%d) = %llu\n",
+                n - 1, b);
 
-      exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
-  return c;
+    return c;
 }
 
 /*
@@ -118,35 +102,31 @@ fibonacci_naive(int n)
   Generally preferable to top-down approach since loops are faster than the
   stack.
 */
-unsigned long long int
-fibonacci_tabulated(int n)
-{
-  unsigned long long int
-  *memo = malloc(sizeof(unsigned long long int) * (n + 1));
+unsigned long long int fibonacci_tabulated(int n) {
+    unsigned long long int *memo =
+        malloc(sizeof(unsigned long long int) * (n + 1));
 
-  memo[0] = 0U;
-  memo[1] = 1U;
+    memo[0] = 0U;
+    memo[1] = 1U;
 
-  for (int i = 2; i <= n; i++)
-    {
-      memo[i] = memo[i - 1] + memo[i - 2];
+    for (int i = 2; i <= n; i++) {
+        memo[i] = memo[i - 1] + memo[i - 2];
 
-      /* unsigned overflow check */
-      if (memo[i] < memo[i - 1])
-        {
-          fprintf(stderr,
-                  "unsigned long long int overflow at fibonacci(%d) = %llu\n",
-                  i - 1, memo[i - 1]);
+        /* unsigned overflow check */
+        if (memo[i] < memo[i - 1]) {
+            fprintf(stderr,
+                    "unsigned long long int overflow at fibonacci(%d) = %llu\n",
+                    i - 1, memo[i - 1]);
 
-          free(memo);
+            free(memo);
 
-          exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
     }
 
-  unsigned long long int value = memo[n];
+    unsigned long long int value = memo[n];
 
-  free(memo);
+    free(memo);
 
-  return value;
+    return value;
 }

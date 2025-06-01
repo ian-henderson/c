@@ -17,28 +17,25 @@
   distance i inches from the left end, for i = 1, 2, ..., n - 1.
 */
 
+#include "rod_cutting.h"
 #include <stdio.h>  // fprintf, printf, stderr
 #include <stdlib.h> // EXIT_FAILURE
-#include "rod_cutting.h"
 
-int
-main(void)
-{
-  int p[] = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
-  int p_length = sizeof(p) / sizeof(p[0]);
-  int n = 9;
+int main(void) {
+    int p[] = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+    int p_length = sizeof(p) / sizeof(p[0]);
+    int n = 9;
 
-  if (n > p_length)
-    {
-      fprintf(stderr, "n is larger than prices array\n");
+    if (n > p_length) {
+        fprintf(stderr, "n is larger than prices array\n");
 
-      return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
-  printf("prices: ");
-  print_array(p, p_length);
-  printf("n: %d\n", n);
-  printf("Max profit (naive): %d\n", cut_rod_naive(p, n));
-  printf("Max profit (memoized): %d\n", cut_rod_memoized(p, n));
-  printf("Max profit (tabulated): %d\n", cut_rod_tabulated(p, n));
+    printf("prices: ");
+    print_array(p, p_length);
+    printf("n: %d\n", n);
+    printf("Max profit (naive): %d\n", cut_rod_naive(p, n));
+    printf("Max profit (memoized): %d\n", cut_rod_memoized(p, n));
+    printf("Max profit (tabulated): %d\n", cut_rod_tabulated(p, n));
 }

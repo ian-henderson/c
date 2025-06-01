@@ -1,31 +1,26 @@
-#include <stdio.h>
 #include "../include/hash_table.h"
+#include <stdio.h>
 
-int
-main()
-{
-  hash_table *t = hash_table_create();
-  hash_table_insert(t, "foo", "bar");
-  hash_table_insert(t, "baz", "qux");
-  hash_table_insert(t, "quux", "corge");
-  hash_table_insert(t, "grault", "garply");
-  hash_table_insert(t, "waldo", "fred");
-  hash_table_insert(t, "plugh", "fred");
+int main() {
+    hash_table *t = hash_table_create();
 
-  char *search_result = hash_table_search(t, "foo");
+    char *key_value_pairs[][2] = {{"foo", "bar"},    {"baz", "qux"},
+                                  {"quux", "corge"}, {"grault", "garply"},
+                                  {"waldo", "fred"}, {"plugh", "fred"}};
 
-  if (search_result != NULL)
-    {
-      printf("search_result: %s\n", search_result);
-    }
+    for (unsigned long i = 0;
+         i < (sizeof(key_value_pairs) / sizeof(key_value_pairs[0])); i++)
+        hash_table_insert(t, key_value_pairs[i][0], key_value_pairs[i][1]);
 
-  hash_table_delete(t, "foo");
+    char *search_result = hash_table_search(t, "foo");
+    if (search_result != NULL)
+        printf("search_result: %s\n", search_result);
 
-  search_result = hash_table_search(t, "foo");
-  if (search_result != NULL)
-    {
-      printf("search_result: %s\n", search_result);
-    }
+    hash_table_delete(t, "foo");
 
-  hash_table_free(t);
+    search_result = hash_table_search(t, "foo");
+    if (search_result != NULL)
+        printf("search_result: %s\n", search_result);
+
+    hash_table_free(t);
 }

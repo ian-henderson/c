@@ -1,6 +1,7 @@
 a.out
 main
 *~
+.ccls-cache
 
 # Prerequisites
 *.d
