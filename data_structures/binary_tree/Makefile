@@ -1,2 +1,2 @@
 build:
-	gcc *.c -o main -Wall -Werror
+	gcc src/*.{c,h} -o main -Wall -Werror
