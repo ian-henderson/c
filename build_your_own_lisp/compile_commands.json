@@ -1,0 +1,36 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=c99",
+      "-g",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/ian/Developer/c/build_your_own_lisp",
+    "file": "/home/ian/Developer/c/build_your_own_lisp/src/main.c",
+    "output": "/home/ian/Developer/c/build_your_own_lisp/obj/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=c99",
+      "-g",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/mpc.o",
+      "src/mpc.c"
+    ],
+    "directory": "/home/ian/Developer/c/build_your_own_lisp",
+    "file": "/home/ian/Developer/c/build_your_own_lisp/src/mpc.c",
+    "output": "/home/ian/Developer/c/build_your_own_lisp/obj/mpc.o"
+  }
+]
