@@ -1,5 +1,6 @@
 #include "evaluation.h"
 #include "mpc.h"    // mpc_ast_t
+#include <math.h>   // pow
 #include <stdlib.h> // atoi
 #include <string.h> // strcmp, strstr
 
@@ -53,5 +54,9 @@ long eval_op(long x, char *op, long y) {
         return x * y;
     if (strcmp(op, "/") == 0)
         return x / y;
+    if (strcmp(op, "%") == 0)
+        return x % y;
+    if (strcmp(op, "^") == 0)
+        return pow(x, y);
     return 0;
 }

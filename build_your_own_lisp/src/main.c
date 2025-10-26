@@ -1,10 +1,10 @@
-#include "evaluation.h"
-#include "mpc.h"
-#include <signal.h>  // signal, SIGINT
-#include <stdbool.h> // true
-#include <stdio.h>   // printf
-#include <stdlib.h>  // free, malloc, exit
-#include <string.h>  // strcpy, strlen
+#include "evaluation.h" // eval, get_branch_count, get_leaf_count
+#include "mpc.h"        //
+#include <signal.h>     // SIGINT, signal
+#include <stdbool.h>    // true
+#include <stdio.h>      // fgets, fputs, printf
+#include <stdlib.h>     // exit, free, malloc
+#include <string.h>     // strcpy, strlen
 
 #ifdef _WIN32
 
@@ -47,7 +47,7 @@ int main() {
 
     mpca_lang(MPCA_LANG_DEFAULT, "\
               number: /-?[0-9]+/ ;\
-              operator: '+' | '-' | '*' | '/' ;\
+              operator: '+' | '-' | '*' | '/' | '%' | '^' ;\
               expr: <number> | '(' <operator> <expr>+ ')' ;\
               lispy: /^/ <operator> <expr>+ /$/ ;\
               ",
