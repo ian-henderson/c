@@ -16,7 +16,6 @@ int get_branch_count(mpc_ast_t *t) {
     return total;
 }
 
-// Leaves are numbers and operators
 int get_leaf_count(mpc_ast_t *t) {
     if (strstr(t->tag, "number") || strstr(t->tag, "operator"))
         return 1;
